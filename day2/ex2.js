@@ -8,20 +8,22 @@ fileData.split(/\r?\n/).forEach(d => {
   data.push(d);
 })
 
-let x = 0;
-let y = 0;
+let hor = 0;
+let aim = 0;
+let depth = 0;
 
 for(let d of data) {  
   const directions = d.split(' ')
   const dir = directions[0];
   const val = Number(directions[1]);
 
-  if ( dir === 'forward') {
-    x += val;
+  if(dir === 'forward') {
+    hor += val;
+    depth += (aim * val);
   } else {
-    y = dir === 'up' ? y - val : y + val;
+    aim = dir === 'up' ? aim - val : aim + val;
   }
 }
 
-const pos = x * y;
+const pos = hor * depth;
 console.log(pos);
